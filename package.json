@@ -1,0 +1,28 @@
+{
+  "name": "game-inventory",
+  "version": "1.0.0",
+  "description": "Online store for games",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KaberaSamuel/game-inventory.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/KaberaSamuel/game-inventory/issues"
+  },
+  "homepage": "https://github.com/KaberaSamuel/game-inventory#readme",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-validator": "^7.2.1",
+    "pg": "^8.13.1"
+  }
+}
