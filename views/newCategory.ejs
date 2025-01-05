@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../public/styles/general.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../public/styles/newCategory.css"
+    />
+  </head>
+  <body>
+    <%- include('navbar') %>
+
+    <main>
+      <h2 class="form-title">Create category</h2>
+
+      <form action="/categories/create" method="post">
+        <div>
+          <label for="name">Name:</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="action, adventure,..."
+          />
+        </div>
+
+        <div>
+          <label for="about">Description:</label>
+          <textarea name="about" id="about"></textarea>
+        </div>
+
+        <div>
+          <input type="file" />
+        </div>
+      </form>
+    </main>
+  </body>
+</html>

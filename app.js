@@ -7,6 +7,7 @@ import path from "node:path";
 const app = express();
 app.set("view engine", "ejs");
 app.set("views", path.join("./", "views"));
+app.use("/public", express.static("./" + "public"));
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/", homeRouter);

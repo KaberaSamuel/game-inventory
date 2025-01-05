@@ -1,8 +1,12 @@
 import { Router } from "express";
-import { itemsHomeGetReqs } from "../controllers/itemsController.js";
+import {
+  itemsHomeGetReqs,
+  newItemGetReqs,
+} from "../controllers/itemsController.js";
 
 const itemsRouter = Router();
 
 itemsRouter.get("/", itemsHomeGetReqs);
+itemsRouter.get("/create", newItemGetReqs);
 
 export default itemsRouter;

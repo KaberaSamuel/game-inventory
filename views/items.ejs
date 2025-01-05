@@ -4,12 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../public/styles/general.css"
+    />
   </head>
   <body>
-    <p>Welcome to all items page</p>
+    <%- include('navbar') %>
 
-    <% items.forEach( ({name}) => { %>
-    <p><%= name %></p>
-    <%})%>
+    <main>
+      <p>Welcome to all items page</p>
+
+      <% items.forEach( ({name}) => { %>
+      <p><%= name %></p>
+      <%})%>
+    </main>
   </body>
 </html>

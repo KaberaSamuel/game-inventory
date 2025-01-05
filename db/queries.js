@@ -3,16 +3,18 @@ import pool from "./pool.js";
 const categoriesTableSQL = `
 CREATE TABLE categories (
     category_id SERIAL PRIMARY KEY,
-    name VARCHAR
+    name VARCHAR,
+    about VARCHAR,
+    image VARCHAR
+
 );
 
-INSERT INTO categories (name)
+INSERT INTO categories (name, about, image)
 VALUES
-    ('action'),
-    ('adventure'),
-    ('racing'),
-    ('sports');
-
+    ('action', 'Get your adrenaline pumping with action games!', 'action image'),
+    ('adventure', 'Embark on an unforgettable journey with adventure games!', 'adventure image'),
+    ('racing', 'Strap yourself in and get ready for the checkered flag with racing games!', 'racing image'),
+    ('sports','Hit the field, court, or track with sports games! ', 'sport image');
 `;
 
 const itemsTableSQL = `
@@ -44,17 +46,9 @@ async function deleteTable(tableName) {
   await pool.query(`DROP TABLE ${tableName};`);
 }
 
-async function createTableCategories() {
+async function createTable(sql) {
   try {
-    await pool.query(categoriesTableSQL);
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-async function createTableItems() {
-  try {
-    await pool.query(itemsTableSQL);
+    await pool.query(sql);
   } catch (error) {
     console.log(error);
   }
@@ -79,5 +73,8 @@ async function getAllItems() {
     console.log(error);
   }
 }
+
+// createTable(itemsTableSQL);
+// deleteTable("categories");
 
 export { getAllCategories, getAllItems };

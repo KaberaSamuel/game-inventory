@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../public/styles/general.css"
+    />
+  </head>
+  <body>
+    <%- include('navbar') %>
+
+    <main>
+      <h2 class="form-title">Create new item</h2>
+
+      <form action="/items/create" method="post">
+        <div>
+          <label for="name">Name:</label>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Grand Theft Auto"
+          />
+        </div>
+        <div>
+          <label for="about">Description:</label>
+          <textarea name="about" id="about"></textarea>
+        </div>
+        <div>
+          <label for="name">Name:</label>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Grand Theft Auto"
+          />
+        </div>
+        <div>
+          <label for="name">Name:</label>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Grand Theft Auto"
+          />
+        </div>
+        <div>
+          <label for="name">Name:</label>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Grand Theft Auto"
+          />
+        </div>
+      </form>
+    </main>
+  </body>
+</html>
