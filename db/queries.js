@@ -55,9 +55,29 @@ async function createTableCategories() {
 async function createTableItems() {
   try {
     await pool.query(itemsTableSQL);
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
   }
 }
 
-// createTableItems();
+async function getAllCategories() {
+  try {
+    const { rows: categoriesArray } = await pool.query(
+      "SELECT * FROM categories"
+    );
+    return categoriesArray;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function getAllItems() {
+  try {
+    const { rows: itemsArray } = await pool.query("SELECT * FROM items");
+    return itemsArray;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export { getAllCategories, getAllItems };

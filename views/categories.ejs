@@ -7,5 +7,9 @@
   </head>
   <body>
     <p>Welcome to all categories page</p>
+
+    <% categories.forEach(({name}) => { %>
+    <p><%= name %></p>
+    <%})%>
   </body>
 </html>

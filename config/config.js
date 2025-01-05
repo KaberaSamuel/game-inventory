@@ -7,4 +7,6 @@ const database = process.env.DATABASE;
 const password = process.env.PASSWORD;
 const port = process.env.PORT;
 
+// console.log(host, user, database, password, port);
+
 export { host, user, database, password, port };
