@@ -1,4 +1,6 @@
-import { getAllCategories } from "../db/queries.js";
+import { fileLoader } from "ejs";
+import { getAllCategories, insertIntoCategories } from "../db/queries.js";
+import multer from "multer";
 
 async function categoriesHomeGetReqs(req, res) {
   const categories = await getAllCategories();
@@ -7,8 +9,16 @@ async function categoriesHomeGetReqs(req, res) {
   // res.send("all categories");
 }
 
-async function newCategoryGetReqs(req, res) {
+function newCategoryGetReqs(req, res) {
   res.render("newCategory");
 }
 
-export { categoriesHomeGetReqs, newCategoryGetReqs };
+async function newCategoryPostReqs(req, res) {
+  const { name, about } = req.body;
+  const imagePath = req.file.path;
+  console.log(name, about, imagePath);
+  // await insertIntoCategories(name, about, imagePath);
+  res.redirect("/categories");
+}
+
+export { categoriesHomeGetReqs, newCategoryGetReqs, newCategoryPostReqs };

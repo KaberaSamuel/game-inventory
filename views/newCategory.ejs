@@ -15,13 +15,18 @@
       href="../public/styles/newCategory.css"
     />
   </head>
+
   <body>
     <%- include('navbar') %>
 
     <main>
       <h2 class="form-title">Create category</h2>
 
-      <form action="/categories/create" method="post">
+      <form
+        action="/categories/create"
+        method="post"
+        enctype="multipart/form-data"
+      >
         <div>
           <label for="name">Name:</label>
           <input
@@ -38,8 +43,10 @@
         </div>
 
         <div>
-          <input type="file" />
+          <input type="file" name="file" accept="image/jpeg,image/png" />
         </div>
+
+        <button type="submit">Submit</button>
       </form>
     </main>
   </body>

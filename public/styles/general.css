@@ -2,9 +2,9 @@
   --white: rgb(240, 240, 240);
   --black: rgb(10, 10, 10);
   --lightblack: rgb(40, 40, 40);
-  --fs: 1.2rem;
-  --lfs: 1.4rem;
-  --xlfs: 1.6rem;
+  --fs: 1rem;
+  --lfs: 1.2rem;
+  --xlfs: 1.4rem;
 }
 
 * {
@@ -104,4 +104,16 @@ form {
 
 form label {
   font-weight: 600;
+}
+
+form button {
+  width: fit-content;
+  padding: 10px 20px;
+  color: var(--white);
+  background-color: var(--lightblack);
+  border-radius: 15px;
+  border: none;
+  font-size: var(--fs);
+  align-self: center;
+  margin-top: 10px;
 }
