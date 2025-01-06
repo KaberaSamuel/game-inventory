@@ -8,13 +8,6 @@ CREATE TABLE categories (
     imagePath VARCHAR
 
 );
-
-INSERT INTO categories (name, about, image)
-VALUES
-    ('action', 'Get your adrenaline pumping with action games!', 'action image'),
-    ('adventure', 'Embark on an unforgettable journey with adventure games!', 'adventure image'),
-    ('racing', 'Strap yourself in and get ready for the checkered flag with racing games!', 'racing image'),
-    ('sports','Hit the field, court, or track with sports games! ', 'sport image');
 `;
 
 const itemsTableSQL = `
@@ -42,16 +35,16 @@ VALUES
 
 `;
 
-async function deleteTable(tableName) {
-  await pool.query(`DROP TABLE ${tableName};`);
-}
-
 async function createTable(sql) {
   try {
     await pool.query(sql);
   } catch (error) {
     console.log(error);
   }
+}
+
+async function deleteTable(tableName) {
+  await pool.query(`DROP TABLE ${tableName};`);
 }
 
 async function getAllCategories() {
@@ -74,7 +67,13 @@ async function getAllItems() {
   }
 }
 
-// createTable(itemsTableSQL);
-// deleteTable("categories");
+async function insertIntoCategories(name, description, imagePath) {
+  const SQL = `
+  INSERT INTO categories(name,about,imagepath)
+  VALUES ('${name}', '${description}','${imagePath}');
+  `;
 
-export { getAllCategories, getAllItems };
+  await pool.query(SQL);
+}
+
+export { getAllCategories, getAllItems, insertIntoCategories };

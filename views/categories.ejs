@@ -16,9 +16,12 @@
     <main>
       <p>Welcome to all categories page</p>
 
-      <% categories.forEach(({name}) => { %>
-      <p><%= name %></p>
-      <%})%>
+      <% if (categories.length > 0) { %> <% categories.forEach(({name,
+      imagepath}) => { %>
+      <p><%=imagepath%></p>
+      <img src="../<%= imagepath %>" alt="image" />
+      <br />
+      <%})%> <% } %>
     </main>
   </body>
 </html>
