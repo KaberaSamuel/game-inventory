@@ -1,8 +1,9 @@
+import path from "node:path";
 import express from "express";
+// import { body, validationResult } from "express-validator";
 import homeRouter from "./routes/homeRoute.js";
 import categoriesRouter from "./routes/categoriesRoute.js";
 import itemsRouter from "./routes/itemsRoute.js";
-import path from "node:path";
 
 const app = express();
 app.set("view engine", "ejs");

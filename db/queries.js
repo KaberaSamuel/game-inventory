@@ -5,7 +5,7 @@ CREATE TABLE categories (
     category_id SERIAL PRIMARY KEY,
     name VARCHAR,
     about VARCHAR,
-    image VARCHAR
+    imagePath VARCHAR
 
 );
 

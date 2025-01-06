@@ -1,4 +1,6 @@
+import { fileLoader } from "ejs";
 import { getAllCategories } from "../db/queries.js";
+import multer from "multer";
 
 async function categoriesHomeGetReqs(req, res) {
   const categories = await getAllCategories();
@@ -11,4 +13,10 @@ async function newCategoryGetReqs(req, res) {
   res.render("newCategory");
 }
 
-export { categoriesHomeGetReqs, newCategoryGetReqs };
+async function newCategoryPostReqs(req, res) {
+  console.log(req.body);
+  console.log(req.file);
+  res.redirect("/categories/create");
+}
+
+export { categoriesHomeGetReqs, newCategoryGetReqs, newCategoryPostReqs };
