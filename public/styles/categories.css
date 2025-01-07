@@ -13,7 +13,7 @@ main div {
   border-radius: 20px;
   position: relative;
   overflow: hidden;
-  transition: scale 0.1s;
+  transition: scale 0.2s;
 }
 
 .categories > div:hover {

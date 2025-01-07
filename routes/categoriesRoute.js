@@ -5,13 +5,17 @@ import {
   newCategoryPostReqs,
 } from "../controllers/categoriesController.js";
 
-import upload from "../controllers/upload.js";
+import uploadHandler from "../controllers/upload.js";
 
 const categoriesRouter = Router();
 
 categoriesRouter.get("/", categoriesHomeGetReqs);
 categoriesRouter.get("/create", newCategoryGetReqs);
 
-categoriesRouter.post("/create", upload.single("file"), newCategoryPostReqs);
+categoriesRouter.post(
+  "/create",
+  uploadHandler.single("file"),
+  newCategoryPostReqs
+);
 
 export default categoriesRouter;

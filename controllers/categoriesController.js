@@ -15,7 +15,6 @@ function newCategoryGetReqs(req, res) {
 async function newCategoryPostReqs(req, res) {
   const { name, about } = req.body;
   const imagePath = req.file.path;
-  // console.log(name, about, imagePath);
   await insertIntoCategories(name, about, imagePath);
   res.redirect("/categories");
 }
