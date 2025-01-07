@@ -34,16 +34,22 @@
             id="name"
             name="name"
             placeholder="action, adventure,..."
+            required
           />
         </div>
 
         <div>
           <label for="about">Description:</label>
-          <textarea name="about" id="about"></textarea>
+          <textarea name="about" id="about" required></textarea>
         </div>
 
         <div>
-          <input type="file" name="file" accept="image/jpeg,image/png" />
+          <input
+            type="file"
+            name="file"
+            accept="image/jpeg,image/png"
+            required
+          />
         </div>
 
         <button type="submit">Submit</button>

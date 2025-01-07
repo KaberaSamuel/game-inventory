@@ -1,0 +1,9 @@
+.categories {
+  margin-top: 5px;
+}
+
+.categories > div {
+  display: inline-block;
+  margin-right: 10px;
+  /* border: 1px solid hotpink; */
+}

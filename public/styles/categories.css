@@ -1,0 +1,33 @@
+main div {
+  color: white;
+}
+
+.categories {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+.categories > div {
+  height: 170px;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: scale 0.1s;
+}
+
+.categories > div:hover {
+  scale: 1.05;
+}
+
+.categories > div p {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: var(--xlfs);
+  font-weight: 650;
+  text-shadow: 1px 1px black;
+  text-transform: capitalize;
+}

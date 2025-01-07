@@ -1,14 +1,14 @@
-import { getAllItems } from "../db/queries.js";
+import { getAllItems, getAllCategories } from "../db/queries.js";
 
 async function itemsHomeGetReqs(req, res) {
   const items = await getAllItems();
+
   res.render("items", { items: items });
-  // console.log(items);
-  // res.send("all items");
 }
 
 async function newItemGetReqs(req, res) {
-  res.render("newItem");
+  const categories = await getAllCategories();
+  res.render("newItem", { categories: categories });
 }
 
 export { itemsHomeGetReqs, newItemGetReqs };

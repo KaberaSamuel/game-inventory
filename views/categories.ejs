@@ -9,19 +9,28 @@
       type="text/css"
       href="../public/styles/general.css"
     />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../public/styles/categories.css"
+    />
   </head>
   <body>
     <%- include('navbar') %>
 
     <main>
-      <p>Welcome to all categories page</p>
+      <% if (categories.length > 0) { %>
+      <div class="categories">
+        <% categories.forEach(({name, imagepath}) => { %>
 
-      <% if (categories.length > 0) { %> <% categories.forEach(({name,
-      imagepath}) => { %>
-      <p><%=imagepath%></p>
-      <img src="../<%= imagepath %>" alt="image" />
-      <br />
-      <%})%> <% } %>
+        <div>
+          <img src="../<%= imagepath %>" alt="image" />
+          <p><%=name%></p>
+        </div>
+
+        <%})%>
+      </div>
+      <% } %>
     </main>
   </body>
 </html>
