@@ -14,11 +14,18 @@
     <%- include('navbar') %>
 
     <main>
-      <p>Welcome to all items page</p>
-
-      <% items.forEach( ({name}) => { %>
-      <p><%= name %></p>
-      <%})%>
+      <% if (items.length > 0) { %>
+      <div class="covers-container">
+        <% items.forEach( ({logo,name}) => { %>
+        <a href="/items/<%=name%>">
+          <div class="cover">
+            <img src="<%=logo%>" alt="game image" />
+          </div>
+          <p><%=logo%></p>
+        </a>
+        <%})%>
+      </div>
+      <% } %>
     </main>
   </body>
 </html>

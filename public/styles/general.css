@@ -131,3 +131,28 @@ img {
   height: 100%;
   object-fit: cover;
 }
+
+/* styles of covers container on categories and items page */
+.covers-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.covers-container > a {
+  height: 170px;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: scale 0.2s;
+  border: 0.1px solid rgb(35, 35, 35);
+}
+
+.covers-container .cover {
+  height: 100%;
+  width: 100%;
+}
+
+.covers-container > div:hover {
+  scale: 1.05;
+}

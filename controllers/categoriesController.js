@@ -1,11 +1,13 @@
-import { fileLoader } from "ejs";
-import { getAllCategories, insertIntoCategories } from "../db/queries.js";
+import { getAllElements, insertIntoCategories } from "../db/queries.js";
 
 async function categoriesHomeGetReqs(req, res) {
-  const categories = await getAllCategories();
+  const categories = await getAllElements("categories");
   res.render("categories", { categories: categories });
-  // console.log(categories);
-  // res.send("all categories");
+}
+
+function singleCategoryGetReqs(req, res) {
+  const { categoryName } = req.params;
+  res.render("category", { name: categoryName });
 }
 
 function newCategoryGetReqs(req, res) {
@@ -19,4 +21,9 @@ async function newCategoryPostReqs(req, res) {
   res.redirect("/categories");
 }
 
-export { categoriesHomeGetReqs, newCategoryGetReqs, newCategoryPostReqs };
+export {
+  categoriesHomeGetReqs,
+  singleCategoryGetReqs,
+  newCategoryGetReqs,
+  newCategoryPostReqs,
+};

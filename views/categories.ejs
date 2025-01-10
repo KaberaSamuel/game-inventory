@@ -20,13 +20,15 @@
 
     <main>
       <% if (categories.length > 0) { %>
-      <div class="categories">
+      <div class="categories covers-container">
         <% categories.forEach(({name, imagepath}) => { %>
 
-        <div>
-          <img src="../<%= imagepath %>" alt="image" />
-          <p><%=name%></p>
-        </div>
+        <a href="/categories/<%=name%>">
+          <div class="cover">
+            <img src="../<%= imagepath %>" alt="image" />
+            <p><%=name%></p>
+          </div>
+        </a>
 
         <%})%>
       </div>

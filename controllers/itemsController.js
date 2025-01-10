@@ -1,17 +1,17 @@
-import {
-  getAllItems,
-  getAllCategories,
-  insertIntoCategories,
-  insertIntoItems,
-} from "../db/queries.js";
+import { getAllElements, insertIntoItems } from "../db/queries.js";
 
 async function itemsHomeGetReqs(req, res) {
-  const items = await getAllItems();
+  const items = await getAllElements("items");
   res.render("items", { items: items });
 }
 
+async function singleItemGetReqs(req, res) {
+  const { itemName } = req.params;
+  res.render("item", { name: itemName });
+}
+
 async function newItemGetReqs(req, res) {
-  const categories = await getAllCategories();
+  const categories = await getAllElements("categories");
   res.render("newItem", { categories: categories });
 }
 
@@ -42,11 +42,8 @@ async function newItemPostReqs(req, res) {
     genreString,
   };
 
-  // console.log(itemData);
-
   await insertIntoItems(itemData);
-
   res.redirect("/items");
 }
 
-export { itemsHomeGetReqs, newItemGetReqs, newItemPostReqs };
+export { itemsHomeGetReqs, singleItemGetReqs, newItemGetReqs, newItemPostReqs };

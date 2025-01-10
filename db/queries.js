@@ -5,7 +5,7 @@ CREATE TABLE categories (
     category_id SERIAL PRIMARY KEY,
     name VARCHAR,
     about VARCHAR,
-    imagePath VARCHAR
+    image VARCHAR
 
 );
 `;
@@ -38,21 +38,13 @@ async function deleteTable(tableName) {
   await pool.query(`DROP TABLE ${tableName};`);
 }
 
-async function getAllCategories() {
+async function getAllElements(tableName) {
   try {
-    const { rows: categoriesArray } = await pool.query(
-      "SELECT * FROM categories"
+    const { rows: elementsArray } = await pool.query(
+      `SELECT * FROM ${tableName}`
     );
-    return categoriesArray;
-  } catch (error) {
-    console.log(error);
-  }
-}
 
-async function getAllItems() {
-  try {
-    const { rows: itemsArray } = await pool.query("SELECT * FROM items");
-    return itemsArray;
+    return elementsArray;
   } catch (error) {
     console.log(error);
   }
@@ -76,4 +68,6 @@ async function insertIntoItems(itemData) {
   await pool.query(SQL, Object.values(itemData));
 }
 
-export { getAllCategories, getAllItems, insertIntoCategories, insertIntoItems };
+getAllElements("items");
+
+export { getAllElements, insertIntoCategories, insertIntoItems };
