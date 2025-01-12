@@ -7,6 +7,22 @@
     <link rel="stylesheet" href="../public/styles/general.css" />
   </head>
   <body>
-    <h1><%=name%></h1>
+    <div>
+      <img src="../<%=image%>" alt="cover image" />
+    </div>
+    <div>
+      <h1><%= name %></h1>
+      <p><%= description %></p>
+    </div>
+    <div>
+      <h1>Items</h1>
+      <div>
+        <% items.forEach(({logo}) => { %>
+        <div>
+          <img src="../<%=logo%>" alt="logo image" />
+        </div>
+        <% }) %>
+      </div>
+    </div>
   </body>
 </html>

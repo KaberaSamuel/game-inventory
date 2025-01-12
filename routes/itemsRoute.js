@@ -11,9 +11,9 @@ import uploadHandler from "../controllers/upload.js";
 const itemsRouter = Router();
 
 itemsRouter.get("/", itemsHomeGetReqs);
+itemsRouter.get("/create", newItemGetReqs);
 itemsRouter.get("/:itemName", singleItemGetReqs);
 
-itemsRouter.get("/create", newItemGetReqs);
 itemsRouter.post(
   "/create",
   uploadHandler.fields([

@@ -1,3 +1,4 @@
+import pool from "../db/pool.js";
 import { getAllElements, insertIntoCategories } from "../db/queries.js";
 
 async function categoriesHomeGetReqs(req, res) {
@@ -5,9 +6,26 @@ async function categoriesHomeGetReqs(req, res) {
   res.render("categories", { categories: categories });
 }
 
-function singleCategoryGetReqs(req, res) {
+async function singleCategoryGetReqs(req, res) {
   const { categoryName } = req.params;
-  res.render("category", { name: categoryName });
+
+  const { rows } = await pool.query(
+    `SELECT about,imagepath FROM categories WHERE name='${categoryName}';`
+  );
+  const categoryData = rows[0];
+
+  const { about, imagepath: image } = categoryData;
+
+  const { rows: genreItemsData } = await pool.query(
+    `SELECT * FROM items WHERE genres LIKE '%${categoryName}%';`
+  );
+
+  res.render("category", {
+    name: categoryName,
+    description: about,
+    image: image,
+    items: genreItemsData,
+  });
 }
 
 function newCategoryGetReqs(req, res) {

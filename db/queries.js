@@ -41,7 +41,7 @@ async function deleteTable(tableName) {
 async function getAllElements(tableName) {
   try {
     const { rows: elementsArray } = await pool.query(
-      `SELECT * FROM ${tableName}`
+      `SELECT * FROM ${tableName};`
     );
 
     return elementsArray;
