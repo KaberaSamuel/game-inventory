@@ -2,11 +2,10 @@ import { getAllElements, insertIntoItems } from "../db/queries.js";
 
 async function itemsHomeGetReqs(req, res) {
   const items = await getAllElements("items");
-  res.render("items", { items: items });
+  res.render("items", { itemsArray: items });
 }
 
 async function singleItemGetReqs(req, res) {
-  const { itemName } = req.params;
   res.render("item", { name: itemName });
 }
 

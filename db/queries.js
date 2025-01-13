@@ -38,18 +38,6 @@ async function deleteTable(tableName) {
   await pool.query(`DROP TABLE ${tableName};`);
 }
 
-async function getAllElements(tableName) {
-  try {
-    const { rows: elementsArray } = await pool.query(
-      `SELECT * FROM ${tableName};`
-    );
-
-    return elementsArray;
-  } catch (error) {
-    console.log(error);
-  }
-}
-
 async function insertIntoCategories(name, description, imagePath) {
   const SQL = `
   INSERT INTO categories(name,about,imagepath)
@@ -68,6 +56,38 @@ async function insertIntoItems(itemData) {
   await pool.query(SQL, Object.values(itemData));
 }
 
-getAllElements("items");
+async function getAllElements(tableName) {
+  try {
+    const { rows: elementsArray } = await pool.query(
+      `SELECT * FROM ${tableName};`
+    );
 
-export { getAllElements, insertIntoCategories, insertIntoItems };
+    return elementsArray;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function getTableElement(table, columnName) {
+  const { rows } = await pool.query(
+    `SELECT * FROM ${table} WHERE name='${columnName}';`
+  );
+
+  return rows;
+}
+
+async function getItemsFromGenre(genreName) {
+  const { rows } = await pool.query(
+    `SELECT * FROM items WHERE genres LIKE '%${genreName}%';`
+  );
+
+  return rows;
+}
+
+export {
+  insertIntoCategories,
+  insertIntoItems,
+  getAllElements,
+  getTableElement,
+  getItemsFromGenre,
+};

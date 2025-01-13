@@ -13,19 +13,6 @@
   <body>
     <%- include('navbar') %>
 
-    <main>
-      <% if (items.length > 0) { %>
-      <div class="covers-container">
-        <% items.forEach( ({logo,name}) => { %>
-        <a href="/items/<%=name%>">
-          <div class="cover">
-            <img src="<%=logo%>" alt="game image" />
-          </div>
-          <p><%=logo%></p>
-        </a>
-        <%})%>
-      </div>
-      <% } %>
-    </main>
+    <main><%- include('itemsComponent', {itemsArray: itemsArray}) %></main>
   </body>
 </html>

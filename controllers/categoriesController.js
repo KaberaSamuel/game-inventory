@@ -1,5 +1,10 @@
 import pool from "../db/pool.js";
-import { getAllElements, insertIntoCategories } from "../db/queries.js";
+import {
+  getAllElements,
+  getTableElement,
+  getItemsFromGenre,
+  insertIntoCategories,
+} from "../db/queries.js";
 
 async function categoriesHomeGetReqs(req, res) {
   const categories = await getAllElements("categories");
@@ -9,22 +14,17 @@ async function categoriesHomeGetReqs(req, res) {
 async function singleCategoryGetReqs(req, res) {
   const { categoryName } = req.params;
 
-  const { rows } = await pool.query(
-    `SELECT about,imagepath FROM categories WHERE name='${categoryName}';`
-  );
-  const categoryData = rows[0];
+  const [categoryData] = await getTableElement("categories", categoryName);
 
   const { about, imagepath: image } = categoryData;
 
-  const { rows: genreItemsData } = await pool.query(
-    `SELECT * FROM items WHERE genres LIKE '%${categoryName}%';`
-  );
+  const genreItemsData = await getItemsFromGenre(categoryName);
 
   res.render("category", {
     name: categoryName,
     description: about,
     image: image,
-    items: genreItemsData,
+    categoryItems: genreItemsData,
   });
 }
 

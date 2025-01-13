@@ -5,24 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="../public/styles/general.css" />
+    <link rel="stylesheet" href="../public/styles/category.css" />
   </head>
   <body>
-    <div>
+    <%- include('navbar') %>
+
+    <div class="cover-image">
       <img src="../<%=image%>" alt="cover image" />
     </div>
+
     <div>
       <h1><%= name %></h1>
       <p><%= description %></p>
     </div>
+
     <div>
       <h1>Items</h1>
-      <div>
-        <% items.forEach(({logo}) => { %>
-        <div>
-          <img src="../<%=logo%>" alt="logo image" />
-        </div>
-        <% }) %>
-      </div>
+
+      <%- include('itemsComponent', {itemsArray: categoryItems}) %>
     </div>
   </body>
 </html>

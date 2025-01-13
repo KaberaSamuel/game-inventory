@@ -1,0 +1,11 @@
+<% if (itemsArray.length > 0) { %>
+<div class="covers-container">
+  <% itemsArray.forEach( ({logo,name}) => { %>
+  <a href="/items/<%=name%>">
+    <div class="cover">
+      <img src="../<%=logo%>" alt="game image" />
+    </div>
+  </a>
+  <%})%>
+</div>
+<% } %>
