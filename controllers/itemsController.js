@@ -1,4 +1,13 @@
-import { getAllElements, insertIntoItems } from "../db/queries.js";
+import {
+  insertIntoItems,
+  getAllElements,
+  getTableElement,
+} from "../db/queries.js";
+
+function formatDate(unformattedDate) {
+  const date = new Date(unformattedDate);
+  return date.toDateString();
+}
 
 async function itemsHomeGetReqs(req, res) {
   const items = await getAllElements("items");
@@ -6,7 +15,34 @@ async function itemsHomeGetReqs(req, res) {
 }
 
 async function singleItemGetReqs(req, res) {
-  res.render("item", { name: itemName });
+  const { itemName } = req.params;
+
+  const [itemData] = await getTableElement("items", itemName);
+  const {
+    image: coverImage,
+    about: description,
+    genres,
+    price,
+    rating,
+    publisher,
+    units,
+  } = itemData;
+
+  const release_date = formatDate(itemData.release_date);
+
+  const genresArray = genres.split(",");
+
+  res.render("item", {
+    coverImage: coverImage,
+    itemName: itemName,
+    description: description,
+    price: price,
+    rating: rating,
+    publisher: publisher,
+    release_date: release_date,
+    units: units,
+    genresArray: genresArray,
+  });
 }
 
 async function newItemGetReqs(req, res) {

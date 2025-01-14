@@ -4,8 +4,53 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="../public/styles/general.css" />
+    <link rel="stylesheet" href="../public/styles/item.css" />
   </head>
   <body>
-    <h1><%=name%></h1>
+    <%- include('navbar') %>
+
+    <main>
+      <div class="cover-image">
+        <img src="../<%=coverImage%>" alt="cover image" />
+      </div>
+
+      <div class="item-data">
+        <div>
+          <p class="name"><%=itemName%></p>
+          <p><%=description%></p>
+        </div>
+
+        <div class="genres">
+          <% genresArray.forEach((genre) => { %>
+          <a href="/categories/<%=genre%>">
+            <div>
+              <p><%=genre%></p>
+            </div>
+          </a>
+          <% }) %>
+        </div>
+
+        <div class="price">
+          <p><span>Price:</span> $<%= price %></p>
+        </div>
+
+        <div>
+          <p><span>Rating:</span> <%= rating %></p>
+        </div>
+
+        <div>
+          <p><span>Publisher:</span> <%= publisher %></p>
+        </div>
+
+        <div>
+          <p><span>Released:</span> <%= release_date %></p>
+        </div>
+
+        <div>
+          <p><span>Units available in stock:</span> <%= units %></p>
+        </div>
+      </div>
+    </main>
   </body>
 </html>

@@ -1,7 +1,10 @@
 :root {
   --white: rgb(240, 240, 240);
   --black: rgb(10, 10, 10);
+  --lightblue: rgb(100, 130, 200);
+  --transparentblue: rgba(10, 20, 60, 0.5);
   --lightblack: rgb(40, 40, 40);
+  --sfs: 0.8rem;
   --fs: 1rem;
   --lfs: 1.2rem;
   --xlfs: 1.4rem;

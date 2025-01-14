@@ -1,0 +1,55 @@
+main {
+  display: grid;
+  padding: 0 10px;
+  grid-template-columns: 46vw 1fr;
+  gap: 20px;
+}
+
+.cover-image {
+  border-radius: 20px;
+  overflow: hidden;
+  height: 100vh;
+}
+
+.item-data {
+  align-self: self-start;
+  padding-top: 10px;
+}
+
+.item-data > div {
+  margin-bottom: 25px;
+  text-transform: capitalize;
+}
+
+.item-data .name {
+  font-size: 1.8rem;
+  font-weight: 600;
+  font-family: cursive;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.item-data .genres {
+  display: flex;
+  gap: 10px;
+}
+
+.item-data .genres a {
+  color: var(--lightblue);
+  background-color: var(--transparentblue);
+  font-size: var(--sfs);
+  font-weight: 650;
+  text-decoration: none;
+  text-transform: capitalize;
+  padding: 5px 15px;
+  border-radius: 20px;
+}
+
+.item-data .genres a:hover {
+  background-color: var(--lightblue);
+  color: white;
+}
+
+.item-data span {
+  font-weight: 700;
+}
