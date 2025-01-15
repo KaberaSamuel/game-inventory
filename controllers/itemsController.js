@@ -2,11 +2,43 @@ import {
   insertIntoItems,
   getAllElements,
   getTableElement,
+  updateItemsTable,
 } from "../db/queries.js";
 
 function formatDate(unformattedDate) {
   const date = new Date(unformattedDate);
   return date.toDateString();
+}
+
+//function for extracting ready data to insert into items table
+function getDataFromItemForm(req) {
+  const { name, about, genres, price, units, publisher, release_date, rating } =
+    req.body;
+
+  // getting list of genres in a string
+  let genreString;
+  if (typeof genres === "string") {
+    genreString = genres;
+  } else {
+    genreString = genres.join(",");
+  }
+
+  const logo = req.files.logo[0].filename;
+  const image = req.files.cover[0].filename;
+  const itemData = {
+    name,
+    price,
+    rating,
+    publisher,
+    release_date,
+    units,
+    logo,
+    image,
+    about,
+    genreString,
+  };
+
+  return itemData;
 }
 
 async function itemsHomeGetReqs(req, res) {
@@ -51,21 +83,17 @@ async function newItemGetReqs(req, res) {
 }
 
 async function newItemPostReqs(req, res) {
-  const { name, about, genres, price, units, publisher, release_date, rating } =
-    req.body;
+  const itemData = getDataFromItemForm(req);
+  await insertIntoItems(itemData);
+  res.redirect("/items");
+}
 
-  // getting list of genres in a string
-  let genreString;
-  if (typeof genres === "string") {
-    genreString = genres;
-  } else {
-    genreString = genres.join(",");
-  }
+async function updateItemGetReqs(req, res) {
+  const allCategories = await getAllElements("categories");
+  const { itemName } = req.params;
+  const [itemData] = await getTableElement("items", itemName);
 
-  const logo = req.files.logo[0].path;
-  const image = req.files.cover[0].path;
-  const itemData = {
-    name,
+  const {
     price,
     rating,
     publisher,
@@ -74,11 +102,39 @@ async function newItemPostReqs(req, res) {
     logo,
     image,
     about,
-    genreString,
-  };
+    genres,
+  } = itemData;
 
-  await insertIntoItems(itemData);
+  const genresArray = genres.split(",");
+
+  res.render("updateItem", {
+    itemName: itemName,
+    price: price,
+    rating: rating,
+    publisher: publisher,
+    release_date: release_date,
+    units: units,
+    logo: logo,
+    image: image,
+    about: about,
+    genres: genresArray,
+    categories: allCategories,
+  });
+}
+
+async function updateItemPostReqs(req, res) {
+  const itemData = getDataFromItemForm(req);
+  const { name: itemName } = itemData;
+
+  await updateItemsTable(itemName, itemData);
   res.redirect("/items");
 }
 
-export { itemsHomeGetReqs, singleItemGetReqs, newItemGetReqs, newItemPostReqs };
+export {
+  itemsHomeGetReqs,
+  singleItemGetReqs,
+  newItemGetReqs,
+  newItemPostReqs,
+  updateItemGetReqs,
+  updateItemPostReqs,
+};

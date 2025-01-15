@@ -21,6 +21,31 @@ main {
   text-transform: capitalize;
 }
 
+.item-data .update-item {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  padding-right: 20px;
+}
+
+.item-data .update-item a {
+  text-transform: lowercase;
+  padding: 5px 15px;
+  background-color: var(--lightblack);
+  border-radius: 15px;
+  font-weight: 600;
+  transition: scale 0.2s;
+}
+
+.item-data .update-item a:hover {
+  scale: 1.1;
+}
+
+.item-data a i {
+  font-size: var(--sfs);
+  margin-right: 2px;
+}
+
 .item-data .name {
   font-size: 1.8rem;
   font-weight: 600;

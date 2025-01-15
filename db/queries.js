@@ -84,10 +84,48 @@ async function getItemsFromGenre(genreName) {
   return rows;
 }
 
+async function updateItemsTable(itemName, itemData) {
+  const {
+    name,
+    price,
+    rating,
+    publisher,
+    release_date,
+    units,
+    logo,
+    image,
+    about,
+    genreString,
+  } = itemData;
+
+  const SQL = `
+    UPDATE items
+    SET name=$1, price=$2, rating=$3, publisher=$4, release_date=$5, units=$6, logo=$7, image=$8, about=$9, genres=$10
+    WHERE name='${itemName}';
+  `;
+
+  // re-arranging values in array to match the query order
+  const valuesArray = [
+    name,
+    price,
+    rating,
+    publisher,
+    release_date,
+    units,
+    logo,
+    image,
+    about,
+    genreString,
+  ];
+
+  await pool.query(SQL, valuesArray);
+}
+
 export {
   insertIntoCategories,
   insertIntoItems,
   getAllElements,
   getTableElement,
   getItemsFromGenre,
+  updateItemsTable,
 };
