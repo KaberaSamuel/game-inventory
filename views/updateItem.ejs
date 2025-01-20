@@ -135,13 +135,14 @@
       </div>
     </form>
 
-    <script>
-      function setFileOnInput(filePath, fileInput) {
+    <script type="module">
+      // function for attaching default image to the file input
+      function setFileOnInput(filePath, htmlFileInput) {
         const fileName = filePath.split("/").slice(-1);
-        const myFile = new File(["my file content"], fileName);
+        const myFile = new File(["my content"], fileName);
         const dataTransfer = new DataTransfer();
         dataTransfer.items.add(myFile);
-        fileInput.files = dataTransfer.files;
+        htmlFileInput.files = dataTransfer.files;
       }
 
       window.addEventListener("load", () => {
@@ -156,7 +157,6 @@
         const genresArray = "<%=genres%>".split(",");
 
         genreInputs.forEach((input) => {
-          console.log(input.value);
           if (genresArray.includes(input.value)) {
             input.checked = true;
           }

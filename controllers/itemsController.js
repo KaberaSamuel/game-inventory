@@ -5,6 +5,8 @@ import {
   updateItemsTable,
 } from "../db/queries.js";
 
+import fs from "node:fs/promises";
+
 function formatDate(unformattedDate) {
   const date = new Date(unformattedDate);
   return date.toDateString();
@@ -25,6 +27,7 @@ function getDataFromItemForm(req) {
 
   const logo = req.files.logo[0].filename;
   const image = req.files.cover[0].filename;
+
   const itemData = {
     name,
     price,
@@ -39,6 +42,19 @@ function getDataFromItemForm(req) {
   };
 
   return itemData;
+}
+
+async function getImageData(image) {
+  const path = `public/images/${image}`;
+  try {
+    const data = await fs.readFile(path);
+    console.log("\n", image, "\n");
+    console.log(data);
+  } catch (err) {
+    console.error(err);
+  }
+
+  return data;
 }
 
 async function itemsHomeGetReqs(req, res) {
@@ -104,6 +120,8 @@ async function updateItemGetReqs(req, res) {
     about,
     genres,
   } = itemData;
+
+  getImageData(image);
 
   const genresArray = genres.split(",");
 
