@@ -136,15 +136,6 @@
     </form>
 
     <script type="module">
-      // function for attaching default image to the file input
-      function setFileOnInput(filePath, htmlFileInput) {
-        const fileName = filePath.split("/").slice(-1);
-        const myFile = new File(["my content"], fileName);
-        const dataTransfer = new DataTransfer();
-        dataTransfer.items.add(myFile);
-        htmlFileInput.files = dataTransfer.files;
-      }
-
       window.addEventListener("load", () => {
         // default values for item description and release date inputs
         document.querySelector("textarea").value = "<%=about%>";
@@ -161,13 +152,6 @@
             input.checked = true;
           }
         });
-
-        // default values for file inputs, i.e: item logo and item cover image
-        const logoInput = document.querySelector("#logo");
-        const imageInput = document.querySelector("#image");
-
-        setFileOnInput("<%=logo%>", logoInput);
-        setFileOnInput("<%=image%>", imageInput);
       });
     </script>
   </body>
