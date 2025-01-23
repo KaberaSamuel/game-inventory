@@ -7,6 +7,7 @@ import {
   updateItemGetReqs,
   updateItemPostReqs,
   deleteGetReqs,
+  deletePostReqs,
 } from "../controllers/itemsController.js";
 
 import uploadHandler from "../controllers/upload.js";
@@ -34,8 +35,9 @@ itemsRouter.post(
     { name: "logo", maxCount: 1 },
     { name: "cover", maxCount: 1 },
   ]),
-
   updateItemPostReqs
 );
+
+itemsRouter.post("/:itemName/delete", deletePostReqs);
 
 export default itemsRouter;

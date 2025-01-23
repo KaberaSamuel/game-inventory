@@ -121,9 +121,9 @@ async function updateItemsTable(itemName, itemData) {
   await pool.query(SQL, valuesArray);
 }
 
-async function deleteFromTable(elementName, tableName) {
-  SQL = `
-    DELETE FROM ${tableName} WHERE name=${elementName};
+async function deleteFromTable(tableName, elementName) {
+  const SQL = `
+    DELETE FROM ${tableName} WHERE name='${elementName}';
   `;
 
   await pool.query(SQL);

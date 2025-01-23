@@ -127,7 +127,17 @@ async function deleteGetReqs(req, res) {
   const { image } = itemData;
   res.render("delete", {
     image: image,
+    name: itemName,
   });
+}
+
+async function deletePostReqs(req, res) {
+  const { choice } = req.body;
+  const { itemName } = req.params;
+  if (choice === "yes") {
+    await deleteFromTable("items", itemName);
+  }
+  res.redirect("/items");
 }
 
 export {
@@ -138,4 +148,5 @@ export {
   updateItemGetReqs,
   updateItemPostReqs,
   deleteGetReqs,
+  deletePostReqs,
 };

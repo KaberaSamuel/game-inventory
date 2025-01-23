@@ -1,16 +1,15 @@
-main > * {
-  margin-bottom: 10px;
-  font-size: var(--lfs);
-}
-
-.buttons {
+form {
   margin-top: 10px;
-  display: flex;
-  gap: 10px;
+  width: 100%;
 }
 
-.buttons > div {
-  background-color: var(--lightblack);
-  padding: 10px 20px;
-  border-radius: 20px;
+form .inputs > div {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+form input[type="radio"] {
+  width: 15px;
+  height: 15px;
 }
