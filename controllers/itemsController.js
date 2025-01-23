@@ -3,6 +3,7 @@ import {
   getAllElements,
   getTableElement,
   updateItemsTable,
+  deleteFromTable,
 } from "../db/queries.js";
 
 function formatDate(unformattedDate) {
@@ -120,6 +121,15 @@ async function updateItemPostReqs(req, res) {
   res.redirect("/items");
 }
 
+async function deleteGetReqs(req, res) {
+  const { itemName } = req.params;
+  const [itemData] = await getTableElement("items", itemName);
+  const { image } = itemData;
+  res.render("delete", {
+    image: image,
+  });
+}
+
 export {
   itemsHomeGetReqs,
   singleItemGetReqs,
@@ -127,4 +137,5 @@ export {
   newItemPostReqs,
   updateItemGetReqs,
   updateItemPostReqs,
+  deleteGetReqs,
 };

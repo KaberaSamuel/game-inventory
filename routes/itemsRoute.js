@@ -6,6 +6,7 @@ import {
   newItemPostReqs,
   updateItemGetReqs,
   updateItemPostReqs,
+  deleteGetReqs,
 } from "../controllers/itemsController.js";
 
 import uploadHandler from "../controllers/upload.js";
@@ -14,8 +15,9 @@ const itemsRouter = Router();
 
 itemsRouter.get("/", itemsHomeGetReqs);
 itemsRouter.get("/create", newItemGetReqs);
-itemsRouter.get("/:itemName", singleItemGetReqs);
 itemsRouter.get("/:itemName/update", updateItemGetReqs);
+itemsRouter.get("/:itemName/delete", deleteGetReqs);
+itemsRouter.get("/:itemName", singleItemGetReqs);
 
 itemsRouter.post(
   "/create",
