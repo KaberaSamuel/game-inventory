@@ -39,9 +39,27 @@ async function newCategoryPostReqs(req, res) {
   res.redirect("/categories");
 }
 
+async function updateCategoryGetReqs(req, res) {
+  const { categoryName } = req.params;
+  const [categoryData] = await getTableElement("categories", categoryName);
+
+  const { name, about } = categoryData;
+
+  res.render("updateCategory", {
+    name: name,
+    description: about,
+  });
+}
+
+async function updateCategoryPostReqs(req, res) {
+  res.redirect("/categories");
+}
+
 export {
   categoriesHomeGetReqs,
   singleCategoryGetReqs,
   newCategoryGetReqs,
   newCategoryPostReqs,
+  updateCategoryGetReqs,
+  updateCategoryPostReqs,
 };

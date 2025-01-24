@@ -21,15 +21,6 @@ itemsRouter.get("/:itemName/delete", deleteGetReqs);
 itemsRouter.get("/:itemName", singleItemGetReqs);
 
 itemsRouter.post(
-  "/create",
-  uploadHandler.fields([
-    { name: "logo", maxCount: 1 },
-    { name: "cover", maxCount: 1 },
-  ]),
-  newItemPostReqs
-);
-
-itemsRouter.post(
   "/:itemName/update",
   uploadHandler.fields([
     { name: "logo", maxCount: 1 },
@@ -37,7 +28,14 @@ itemsRouter.post(
   ]),
   updateItemPostReqs
 );
-
 itemsRouter.post("/:itemName/delete", deletePostReqs);
+itemsRouter.post(
+  "/create",
+  uploadHandler.fields([
+    { name: "logo", maxCount: 1 },
+    { name: "cover", maxCount: 1 },
+  ]),
+  newItemPostReqs
+);
 
 export default itemsRouter;

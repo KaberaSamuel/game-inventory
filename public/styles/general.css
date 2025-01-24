@@ -167,3 +167,29 @@ img {
   height: 100%;
   width: 100%;
 }
+
+/* styles for anchor tags which link to pages that will update item e.g updateCategory or updateItem */
+.update-element {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  padding-right: 20px;
+}
+
+.update-element a {
+  text-transform: lowercase;
+  padding: 5px 15px 7px;
+  background-color: var(--lightblack);
+  border-radius: 15px;
+  font-weight: 600;
+  transition: scale 0.2s;
+}
+
+.update-element a:hover {
+  scale: 1.1;
+}
+
+.update-element a i {
+  font-size: var(--sfs);
+  margin-right: 3px;
+}
