@@ -2,7 +2,7 @@ import pool from "./pool.js";
 
 const categoriesTableSQL = `
 CREATE TABLE categories (
-    category_id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     name VARCHAR,
     about VARCHAR,
     image VARCHAR
@@ -12,7 +12,7 @@ CREATE TABLE categories (
 
 const itemsTableSQL = `
 CREATE TABLE items (
-    item_id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     name VARCHAR,
     price VARCHAR,
     rating VARCHAR,

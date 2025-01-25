@@ -54,8 +54,8 @@ async function updateCategoryGetReqs(req, res) {
 
 async function updateCategoryPostReqs(req, res) {
   const { name: categoryName, about } = req.body;
-  const imagepath = req.file.filename;
-  const categoryData = { categoryName, about, imagepath };
+  const image = req.file.filename;
+  const categoryData = { categoryName, about, image };
   await updateCategoriesTable(categoryName, categoryData);
   res.redirect("/categories");
 }
@@ -63,7 +63,7 @@ async function updateCategoryPostReqs(req, res) {
 async function deleteCategoryGetReqs(req, res) {
   const { categoryName } = req.params;
   const [categoryData] = await getTableElement("categories", categoryName);
-  const { imagepath: image } = categoryData;
+  const { image } = categoryData;
   res.render("delete", {
     image: image,
     name: categoryName,
