@@ -38,13 +38,13 @@ async function deleteTable(tableName) {
   await pool.query(`DROP TABLE ${tableName};`);
 }
 
-async function insertIntoCategories(name, description, imagePath) {
+async function insertIntoCategories(name, description, image) {
   const SQL = `
-  INSERT INTO categories(name,about,imagepath)
-  VALUES ('${name}', '${description}','${imagePath}');
+  INSERT INTO categories(name,about,image)
+  VALUES ($1, $2, $3);
   `;
 
-  await pool.query(SQL);
+  await pool.query(SQL, [name, description, image]);
 }
 
 async function insertIntoItems(itemData) {
@@ -104,8 +104,7 @@ async function updateItemsTable(itemName, itemData) {
     WHERE name='${itemName}';
   `;
 
-  // re-arranging values in array to match the query order
-  const valuesArray = [
+  await pool.query(SQL, [
     name,
     price,
     rating,
@@ -116,9 +115,19 @@ async function updateItemsTable(itemName, itemData) {
     image,
     about,
     genreString,
-  ];
+  ]);
+}
 
-  await pool.query(SQL, valuesArray);
+async function updateCategoriesTable(categoryName, categoryData) {
+  const { categoryName: name, about, image } = categoryData;
+
+  const SQL = `
+    UPDATE categories
+    SET name=$1, about=$2, image=$3
+    WHERE name='${categoryName}';
+  `;
+
+  await pool.query(SQL, [name, about, image]);
 }
 
 async function deleteFromTable(tableName, elementName) {
@@ -136,5 +145,6 @@ export {
   getTableElement,
   getItemsFromGenre,
   updateItemsTable,
+  updateCategoriesTable,
   deleteFromTable,
 };

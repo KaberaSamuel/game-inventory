@@ -14,7 +14,7 @@
       <h2 class="form-title">Create category</h2>
 
       <form
-        action="/categories/create"
+        action="/categories/<%=name%>/update"
         method="post"
         enctype="multipart/form-data"
       >
@@ -32,12 +32,7 @@
 
         <div>
           <label for="about">Description:</label>
-          <textarea
-            name="about"
-            value="<%=description%>"
-            id="about"
-            required
-          ></textarea>
+          <textarea name="about" id="about" required></textarea>
         </div>
 
         <div>

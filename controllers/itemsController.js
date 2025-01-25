@@ -121,17 +121,19 @@ async function updateItemPostReqs(req, res) {
   res.redirect("/items");
 }
 
-async function deleteGetReqs(req, res) {
+async function deleteItemGetReqs(req, res) {
   const { itemName } = req.params;
   const [itemData] = await getTableElement("items", itemName);
   const { image } = itemData;
   res.render("delete", {
     image: image,
     name: itemName,
+    table: "items",
+    elementTitle: "item",
   });
 }
 
-async function deletePostReqs(req, res) {
+async function deleteItemPostReqs(req, res) {
   const { choice } = req.body;
   const { itemName } = req.params;
   if (choice === "yes") {
@@ -147,6 +149,6 @@ export {
   newItemPostReqs,
   updateItemGetReqs,
   updateItemPostReqs,
-  deleteGetReqs,
-  deletePostReqs,
+  deleteItemGetReqs,
+  deleteItemPostReqs,
 };

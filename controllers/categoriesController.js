@@ -1,9 +1,10 @@
-import pool from "../db/pool.js";
 import {
   getAllElements,
   getTableElement,
   getItemsFromGenre,
   insertIntoCategories,
+  deleteFromTable,
+  updateCategoriesTable,
 } from "../db/queries.js";
 
 async function categoriesHomeGetReqs(req, res) {
@@ -16,7 +17,7 @@ async function singleCategoryGetReqs(req, res) {
 
   const [categoryData] = await getTableElement("categories", categoryName);
 
-  const { about, imagepath: image } = categoryData;
+  const { about, image } = categoryData;
 
   const genreItemsData = await getItemsFromGenre(categoryName);
 
@@ -34,8 +35,8 @@ function newCategoryGetReqs(req, res) {
 
 async function newCategoryPostReqs(req, res) {
   const { name, about } = req.body;
-  const imagePath = req.file.path;
-  await insertIntoCategories(name, about, imagePath);
+  const image = req.file.filename;
+  await insertIntoCategories(name, about, image);
   res.redirect("/categories");
 }
 
@@ -52,6 +53,31 @@ async function updateCategoryGetReqs(req, res) {
 }
 
 async function updateCategoryPostReqs(req, res) {
+  const { name: categoryName, about } = req.body;
+  const imagepath = req.file.filename;
+  const categoryData = { categoryName, about, imagepath };
+  await updateCategoriesTable(categoryName, categoryData);
+  res.redirect("/categories");
+}
+
+async function deleteCategoryGetReqs(req, res) {
+  const { categoryName } = req.params;
+  const [categoryData] = await getTableElement("categories", categoryName);
+  const { imagepath: image } = categoryData;
+  res.render("delete", {
+    image: image,
+    name: categoryName,
+    table: "categories",
+    elementTitle: "category",
+  });
+}
+
+async function deleteCategoryPostReqs(req, res) {
+  const { choice } = req.body;
+  const { categoryName } = req.params;
+  if (choice === "yes") {
+    await deleteFromTable("categories", categoryName);
+  }
   res.redirect("/categories");
 }
 
@@ -62,4 +88,6 @@ export {
   newCategoryPostReqs,
   updateCategoryGetReqs,
   updateCategoryPostReqs,
+  deleteCategoryGetReqs,
+  deleteCategoryPostReqs,
 };
