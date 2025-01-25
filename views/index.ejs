@@ -9,11 +9,23 @@
       type="text/css"
       href="../public/styles/general.css"
     />
+    <link rel="stylesheet" type="text/css" href="../public/styles/home.css" />
   </head>
   <body>
     <%- include('navbar') %>
     <main>
-      <h1>Welcome to the game inventory stock</h1>
+      <div class="fullscreen-video-container">
+        <video autoplay loop muted>
+          <source
+            src="../public/images/Abstract Neon Light Background Video, Yellow Spinning Motion Background Loop _ Free Stock Footage.mp4.mp4"
+            type="video/mp4"
+          />
+        </video>
+
+        <div class="fullscreen-video-content">
+          <h1>Some Text</h1>
+        </div>
+      </div>
     </main>
   </body>
 </html>
