@@ -13,19 +13,31 @@
   </head>
   <body>
     <%- include('navbar') %>
-    <main>
-      <div class="fullscreen-video-container">
-        <video autoplay loop muted>
-          <source
-            src="../public/images/Abstract Neon Light Background Video, Yellow Spinning Motion Background Loop _ Free Stock Footage.mp4.mp4"
-            type="video/mp4"
-          />
-        </video>
+    <main class="fullscreen-video-container">
+      <video autoplay loop muted>
+        <source
+          src="../public/images/Abstract Neon Light Background Video, Yellow Spinning Motion Background Loop _ Free Stock Footage.mp4.mp4"
+          type="video/mp4"
+        />
+      </video>
 
-        <div class="fullscreen-video-content">
-          <h1>Some Text</h1>
-        </div>
+      <div class="background-content">
+        <h1>Video Games inventory</h1>
+        <p>The adventure never ends: Expand your world, one game at a time.</p>
+        <a href="/categories">Explore Categories</a>
       </div>
     </main>
+
+    <div class="featured-categories">
+      <h1>Featured categories</h1>
+      <div class="categories">
+        <% featuredCategories.forEach(({name,image}) => { %>
+        <div>
+          <img src="../public/images/<%=image%>" alt="cover image" />
+          <p><%= name %></p>
+        </div>
+        <% }) %>
+      </div>
+    </div>
   </body>
 </html>
