@@ -6,6 +6,13 @@
     <title>Home</title>
     <link
       rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
       type="text/css"
       href="../public/styles/general.css"
     />
@@ -28,16 +35,45 @@
       </div>
     </main>
 
-    <div class="featured-categories">
-      <h1>Featured categories</h1>
-      <div class="categories">
-        <% featuredCategories.forEach(({name,image}) => { %>
-        <div>
-          <img src="../public/images/<%=image%>" alt="cover image" />
-          <p><%= name %></p>
+    <div class="featured">
+      <div class="showcase-image">
+        <img src="public\images\game-character-1.png" alt="image showcase" />
+      </div>
+      <div class="featured-elements">
+        <h1>Featured categories</h1>
+        <div class="elements">
+          <% featuredCategories.forEach(({name,image}) => { %>
+          <a href="/categories/<%=name%>">
+            <img src="../public/images/<%=image%>" alt="cover image" />
+            <p><%= name %></p>
+          </a>
+          <% }) %>
         </div>
-        <% }) %>
       </div>
     </div>
+
+    <div class="featured">
+      <div class="featured-elements">
+        <h1>Featured games</h1>
+        <div class="elements">
+          <% featuredItems.forEach(({name,logo}) => { %>
+          <a href="/items/<%=name%>">
+            <img src="../public/images/<%=logo%>" alt="cover image" />
+          </a>
+          <% }) %>
+        </div>
+      </div>
+
+      <div class="showcase-image">
+        <img src="public\images\game-character-2.png" alt="image showcase" />
+      </div>
+    </div>
+
+    <footer>
+      &copy; <span>2025 Kabera Nshuti Samuel</span>
+      <a href="https://github.com/KaberaSamuel/game-inventory" target="_blank"
+        ><i class="fa-brands fa-github"></i
+      ></a>
+    </footer>
   </body>
 </html>
