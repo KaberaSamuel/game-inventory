@@ -1,0 +1,40 @@
+main {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  position: absolute;
+  inset: 80px 0 0 0;
+  padding: 10px 0;
+}
+
+main .content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  bottom: 50px;
+}
+
+h1 {
+  text-transform: lowercase;
+  letter-spacing: 4px;
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+h2 {
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: var(--lfs);
+}
+
+p {
+  color: var(--gray);
+}
+
+.content a {
+  margin-top: 10px;
+  padding: 10px 20px;
+  border: 1px solid white;
+  border-radius: 20px;
+}

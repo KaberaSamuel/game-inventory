@@ -19,9 +19,8 @@ async function getFeaturedItems() {
   return [blackMythWukong, fornite, needForSpeed];
 }
 
-async function handleHomeReqs(req, res) {
+async function handleHomeReqs(req, res, next) {
   const featuredCategories = await getFeaturedCategories();
-
   const featuredItems = await getFeaturedItems();
 
   res.render("index", {
