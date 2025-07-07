@@ -5,7 +5,7 @@ import {
   insertIntoCategories,
   deleteFromTable,
   updateCategoriesTable,
-} from "../db/queries.js";
+} from "../db.js";
 
 async function categoriesHomeGetReqs(req, res) {
   const categories = await getAllElements("categories");

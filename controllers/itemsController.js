@@ -4,7 +4,7 @@ import {
   getTableElement,
   updateItemsTable,
   deleteFromTable,
-} from "../db/queries.js";
+} from "../db.js";
 
 function formatDate(unformattedDate) {
   const date = new Date(unformattedDate);

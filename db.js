@@ -1,0 +1,114 @@
+import { createClient } from "@supabase/supabase-js";
+import "dotenv/config"; // Load environment variables
+
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_KEY;
+const supabase = createClient(supabaseUrl, supabaseKey);
+
+async function insertIntoCategories(name, description, image) {
+  const { data, error } = await supabase
+    .from("categories")
+    .insert({ name: name, about: description, image: image });
+
+  if (error) {
+    throw error;
+  }
+  return data;
+}
+
+async function insertIntoItems(itemData) {
+  const { data, error } = await supabase.from("items").insert(itemData);
+
+  if (error) {
+    throw error;
+  }
+  return data;
+}
+
+async function getAllElements(tableName) {
+  try {
+    const { data: elementsArray, error } = await supabase
+      .from(tableName)
+      .select("*");
+
+    if (error) {
+      throw error;
+    }
+    return elementsArray;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+async function getTableElement(table, columnName) {
+  const { data: rows, error } = await supabase
+    .from(table)
+    .select("*")
+    .eq("name", columnName)
+    .limit(1);
+
+  if (error) {
+    throw error;
+  }
+  return rows;
+}
+
+async function getItemsFromGenre(genreName) {
+  const { data: rows, error } = await supabase
+    .from("items")
+    .select("*")
+    .ilike("genres", `%${genreName}%`);
+
+  if (error) {
+    throw error;
+  }
+  return rows;
+}
+
+async function updateItemsTable(itemName, itemData) {
+  const { data, error } = await supabase
+    .from("items")
+    .update(itemData)
+    .eq("name", itemName);
+
+  if (error) {
+    throw error;
+  }
+  return data;
+}
+
+async function updateCategoriesTable(categoryName, categoryData) {
+  const { data, error } = await supabase
+    .from("categories")
+    .update(categoryData)
+    .eq("name", categoryName);
+
+  if (error) {
+    throw error;
+  }
+  return data;
+}
+
+async function deleteFromTable(tableName, elementName) {
+  const { data, error } = await supabase
+    .from(tableName)
+    .delete()
+    .eq("name", elementName);
+
+  if (error) {
+    throw error;
+  }
+  return data;
+}
+
+export {
+  insertIntoCategories,
+  insertIntoItems,
+  getAllElements,
+  getTableElement,
+  getItemsFromGenre,
+  updateItemsTable,
+  updateCategoriesTable,
+  deleteFromTable,
+};

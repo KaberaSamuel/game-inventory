@@ -1,5 +1,5 @@
 import { body } from "express-validator";
-import { getTableElement } from "../db/queries.js";
+import { getTableElement } from "../db.js";
 
 async function getFeaturedCategories() {
   const [action] = await getTableElement("categories", "action");
