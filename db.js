@@ -17,7 +17,31 @@ async function insertIntoCategories(name, description, image) {
 }
 
 async function insertIntoItems(itemData) {
-  const { data, error } = await supabase.from("items").insert(itemData);
+  const {
+    name,
+    price,
+    rating,
+    publisher,
+    release_date,
+    units,
+    logo,
+    image,
+    about,
+    genresString,
+  } = itemData;
+
+  const { data, error } = await supabase.from("items").insert({
+    name,
+    price,
+    rating,
+    publisher,
+    release_date,
+    units,
+    logo,
+    image,
+    about,
+    genres: genresString,
+  });
 
   if (error) {
     throw error;
@@ -67,9 +91,32 @@ async function getItemsFromGenre(genreName) {
 }
 
 async function updateItemsTable(itemName, itemData) {
+  const {
+    name,
+    price,
+    rating,
+    publisher,
+    release_date,
+    units,
+    logo,
+    image,
+    about,
+    genresString,
+  } = itemData;
   const { data, error } = await supabase
     .from("items")
-    .update(itemData)
+    .update({
+      name,
+      price,
+      rating,
+      publisher,
+      release_date,
+      units,
+      logo,
+      image,
+      about,
+      genres: genresString,
+    })
     .eq("name", itemName);
 
   if (error) {
@@ -79,9 +126,10 @@ async function updateItemsTable(itemName, itemData) {
 }
 
 async function updateCategoriesTable(categoryName, categoryData) {
+  const { name, about, image } = categoryData;
   const { data, error } = await supabase
     .from("categories")
-    .update(categoryData)
+    .update({ name, about, image })
     .eq("name", categoryName);
 
   if (error) {
