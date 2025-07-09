@@ -2,6 +2,7 @@ import { unlink } from "fs/promises";
 import {
   getAllElements,
   getTableElement,
+  getEditableRows,
   getItemsFromGenre,
   insertIntoCategories,
   deleteFromTable,
@@ -27,8 +28,14 @@ async function singleCategoryGetReqs(req, res) {
   const { categoryName } = req.params;
 
   const [categoryData] = await getTableElement("categories", categoryName);
-
   const { about, image } = categoryData;
+
+  const editableCategories = await getEditableRows("categories");
+  const isEditable = editableCategories.find(
+    ({ name }) => name === categoryName
+  )
+    ? true
+    : false;
 
   const genreItemsData = await getItemsFromGenre(categoryName);
 
@@ -37,6 +44,7 @@ async function singleCategoryGetReqs(req, res) {
     description: about,
     image: image,
     categoryItems: genreItemsData,
+    isEditable,
   });
 }
 
@@ -56,7 +64,6 @@ async function updateCategoryGetReqs(req, res) {
   const [categoryData] = await getTableElement("categories", categoryName);
 
   const { name, about } = categoryData;
-
   res.render("updateCategory", {
     name: name,
     description: about,

@@ -90,6 +90,18 @@ async function getItemsFromGenre(genreName) {
   return rows;
 }
 
+async function getEditableRows(table) {
+  const { data: rows, error } = await supabase
+    .from(table)
+    .select("*")
+    .eq("editable", true);
+
+  if (error) {
+    throw error;
+  }
+  return rows;
+}
+
 async function updateItemsTable(itemName, itemData) {
   const {
     name,
@@ -156,6 +168,7 @@ export {
   getAllElements,
   getTableElement,
   getItemsFromGenre,
+  getEditableRows,
   updateItemsTable,
   updateCategoriesTable,
   deleteFromTable,

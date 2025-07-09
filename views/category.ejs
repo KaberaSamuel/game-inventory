@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Game Inventory</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
@@ -48,5 +48,17 @@
         ><i class="fa-brands fa-github"></i
       ></a>
     </footer>
+
+    <script>
+      const updateButtons = document.querySelector(".update-element");
+
+      updateButtons.addEventListener("click", (e) => {
+        // denying update action on non editable element
+        if ("<%-isEditable%>" == "false") {
+          e.preventDefault();
+          alert("This category can only be updated/deleted by the admin");
+        }
+      });
+    </script>
   </body>
 </html>

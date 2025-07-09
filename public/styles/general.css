@@ -87,7 +87,7 @@ textarea {
   height: 100px;
   color: var(--white);
   background-color: var(--lightblack);
-  padding: 10px;
+  padding: 10px 15px;
   margin-top: 5px;
   font-size: var(--fs);
   border: none;
@@ -102,10 +102,6 @@ textarea:focus {
 
 input {
   height: 45px;
-}
-
-input[type="file"] {
-  padding: 7px;
 }
 
 input[type="checkbox"] {
@@ -129,7 +125,6 @@ form {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  /* border: 2px solid red; */
 }
 
 form label {
@@ -146,6 +141,10 @@ form button {
   font-size: var(--fs);
   align-self: center;
   margin-top: 10px;
+}
+
+form button:hover {
+  border: 1px solid white;
 }
 
 img {

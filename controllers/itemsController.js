@@ -2,6 +2,7 @@ import {
   insertIntoItems,
   getAllElements,
   getTableElement,
+  getEditableRows,
   updateItemsTable,
   deleteFromTable,
 } from "../db.js";
@@ -63,10 +64,15 @@ async function singleItemGetReqs(req, res) {
   } = itemData;
 
   const release_date = formatDate(itemData.release_date);
-
   const genresArray = genres.split(",");
 
+  const editableItems = await getEditableRows("items");
+  const isEditable = editableItems.find(({ name }) => name === itemName)
+    ? true
+    : false;
+
   res.render("item", {
+    isEditable,
     coverImage: coverImage,
     itemName: itemName,
     description: description,
