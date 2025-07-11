@@ -1,3 +1,4 @@
+import { unlink } from "fs/promises";
 import { createClient } from "@supabase/supabase-js";
 import "dotenv/config"; // Load environment variables
 
@@ -8,7 +9,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 async function insertIntoCategories(name, description, image) {
   const { data, error } = await supabase
     .from("categories")
-    .insert({ name: name, about: description, image: image });
+    .insert({ name: name, about: description, image: image, editable: true });
 
   if (error) {
     throw error;
@@ -41,6 +42,7 @@ async function insertIntoItems(itemData) {
     image,
     about,
     genres: genresString,
+    editable: true,
   });
 
   if (error) {
@@ -150,16 +152,31 @@ async function updateCategoriesTable(categoryName, categoryData) {
   return data;
 }
 
-async function deleteFromTable(tableName, elementName) {
-  const { data, error } = await supabase
-    .from(tableName)
-    .delete()
-    .eq("name", elementName);
-
-  if (error) {
-    throw error;
+async function deleteFile(filename) {
+  const filePath = `public/images/${filename}`;
+  try {
+    await unlink(filePath);
+  } catch (err) {
+    console.error("Error deleting file:", err);
   }
-  return data;
+}
+
+async function deleteFromTable(tableName, elementName, associatedFiles) {
+  try {
+    const { data, error } = await supabase
+      .from(tableName)
+      .delete()
+      .eq("name", elementName);
+
+    // deleting associated files, i.e., cover and logo images
+    for (const file of associatedFiles) {
+      await deleteFile(file);
+    }
+
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 export {

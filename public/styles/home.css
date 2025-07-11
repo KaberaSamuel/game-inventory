@@ -93,6 +93,7 @@ body {
   text-shadow: 1px 1px black;
   border-radius: 30px;
   overflow: hidden;
+  transition: scale 0.2s;
 }
 
 .featured-elements .elements a:hover {

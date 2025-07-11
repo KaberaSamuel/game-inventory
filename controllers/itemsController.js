@@ -143,7 +143,9 @@ async function deleteItemPostReqs(req, res) {
   const { choice } = req.body;
   const { itemName } = req.params;
   if (choice === "yes") {
-    await deleteFromTable("items", itemName);
+    // associated files to be deleted
+    const [{ logo, cover }] = await getTableElement("items", itemName);
+    await deleteFromTable("items", itemName, [logo, cover]);
   }
   res.redirect("/items");
 }

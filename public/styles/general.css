@@ -168,10 +168,11 @@ img {
   position: relative;
   overflow: hidden;
   border: 0.1px solid rgb(35, 35, 35);
+  transition: scale 0.2s;
 }
 
 .covers-container > a:hover {
-  scale: 1.08;
+  scale: 1.05;
 }
 
 .covers-container .cover {

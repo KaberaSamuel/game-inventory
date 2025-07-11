@@ -1,4 +1,3 @@
-import { unlink } from "fs/promises";
 import {
   getAllElements,
   getTableElement,
@@ -8,16 +7,6 @@ import {
   deleteFromTable,
   updateCategoriesTable,
 } from "../db.js";
-
-async function deleteFile(filename) {
-  const filePath = `public/images/${filename}`;
-  try {
-    await unlink(filePath);
-    console.log("File deleted successfully!");
-  } catch (err) {
-    console.error("Error deleting file:", err);
-  }
-}
 
 async function categoriesHomeGetReqs(req, res) {
   const categories = await getAllElements("categories");
@@ -95,12 +84,9 @@ async function deleteCategoryPostReqs(req, res) {
 
   if (choice === "yes") {
     const { categoryName } = req.params;
-    const [{ image: coverName }] = await getTableElement(
-      "categories",
-      categoryName
-    );
-    await deleteFromTable("categories", categoryName);
-    await deleteFile(coverName); // deleting cover image
+    // associated file to delete
+    const [{ image }] = await getTableElement("categories", categoryName);
+    await deleteFromTable("categories", categoryName, [image]);
   }
 
   res.redirect("/categories");
