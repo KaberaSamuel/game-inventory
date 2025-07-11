@@ -13,10 +13,13 @@ async function getFeaturedCategories() {
 async function getFeaturedItems() {
   const [blackMythWukong] = await getTableElement("items", "black myth wukong");
   const [fornite] = await getTableElement("items", "fornite");
-
   const [needForSpeed] = await getTableElement("items", "need for speed");
+  const [callOfDuty] = await getTableElement(
+    "items",
+    "Call of Duty: Black Ops Ⅲ"
+  );
 
-  return [blackMythWukong, fornite, needForSpeed];
+  return [blackMythWukong, fornite, needForSpeed, callOfDuty];
 }
 
 async function handleHomeReqs(req, res, next) {
