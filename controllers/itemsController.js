@@ -53,6 +53,7 @@ async function singleItemGetReqs(req, res) {
   const { itemName } = req.params;
 
   const [itemData] = await getTableElement("items", itemName);
+
   const {
     image: coverImage,
     about: description,
@@ -123,7 +124,10 @@ async function updateItemPostReqs(req, res) {
   const itemData = getDataFromItemForm(req);
   const { name: itemName } = itemData;
 
-  await updateItemsTable(itemName, itemData);
+  // associated files to be deleted
+  const [{ logo, image }] = await getTableElement("items", itemName);
+
+  await updateItemsTable(itemName, itemData, [logo, image]);
   res.redirect("/items");
 }
 
@@ -144,8 +148,8 @@ async function deleteItemPostReqs(req, res) {
   const { itemName } = req.params;
   if (choice === "yes") {
     // associated files to be deleted
-    const [{ logo, cover }] = await getTableElement("items", itemName);
-    await deleteFromTable("items", itemName, [logo, cover]);
+    const [{ logo, image }] = await getTableElement("items", itemName);
+    await deleteFromTable("items", itemName, [logo, image]);
   }
   res.redirect("/items");
 }

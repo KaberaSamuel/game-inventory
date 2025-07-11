@@ -6,6 +6,15 @@ const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
+async function deleteFile(filename) {
+  const filePath = `public/images/${filename}`;
+  try {
+    await unlink(filePath);
+  } catch (err) {
+    console.error("Error deleting file:", err);
+  }
+}
+
 async function insertIntoCategories(name, description, image) {
   const { data, error } = await supabase
     .from("categories")
@@ -28,7 +37,7 @@ async function insertIntoItems(itemData) {
     logo,
     image,
     about,
-    genresString,
+    genreString,
   } = itemData;
 
   const { data, error } = await supabase.from("items").insert({
@@ -41,7 +50,7 @@ async function insertIntoItems(itemData) {
     logo,
     image,
     about,
-    genres: genresString,
+    genres: genreString,
     editable: true,
   });
 
@@ -104,7 +113,7 @@ async function getEditableRows(table) {
   return rows;
 }
 
-async function updateItemsTable(itemName, itemData) {
+async function updateItemsTable(itemName, itemData, associatedFiles) {
   const {
     name,
     price,
@@ -117,6 +126,12 @@ async function updateItemsTable(itemName, itemData) {
     about,
     genresString,
   } = itemData;
+
+  // deleting associated files first
+  for (const file of associatedFiles) {
+    await deleteFile(file);
+  }
+
   const { data, error } = await supabase
     .from("items")
     .update({
@@ -139,8 +154,18 @@ async function updateItemsTable(itemName, itemData) {
   return data;
 }
 
-async function updateCategoriesTable(categoryName, categoryData) {
+async function updateCategoriesTable(
+  categoryName,
+  categoryData,
+  associatedFiles
+) {
   const { name, about, image } = categoryData;
+
+  // deleting associated files first
+  for (const file of associatedFiles) {
+    await deleteFile(file);
+  }
+
   const { data, error } = await supabase
     .from("categories")
     .update({ name, about, image })
@@ -150,15 +175,6 @@ async function updateCategoriesTable(categoryName, categoryData) {
     throw error;
   }
   return data;
-}
-
-async function deleteFile(filename) {
-  const filePath = `public/images/${filename}`;
-  try {
-    await unlink(filePath);
-  } catch (err) {
-    console.error("Error deleting file:", err);
-  }
 }
 
 async function deleteFromTable(tableName, elementName, associatedFiles) {
